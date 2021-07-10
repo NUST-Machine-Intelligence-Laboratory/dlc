@@ -27,6 +27,7 @@ os.popen('mkdir -p model')
 
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--root', type=str, required=True)
 parser.add_argument('--dataset', type=str, required=True)
 parser.add_argument('--base_lr', type=float, default=0.1)
 parser.add_argument('--batch_size', type=int, required=True)
@@ -70,8 +71,7 @@ test_transform = torchvision.transforms.Compose([
     torchvision.transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
 ])
 
-root = './data/fg-web-data'
-print(os.path.join(root,data_dir, 'train'))
+print(os.path.join(root, data_dir, 'train'))
 train_data = Imagefolder_modified(os.path.join(root,data_dir, 'train'), transform=train_transform)
 train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True)
 test_data = torchvision.datasets.ImageFolder(os.path.join(root,data_dir, 'val'), transform=test_transform)
@@ -86,7 +86,7 @@ def save_checkpoint(state, filename='checkpoint.pth'):
     torch.save(state, filename)
 
 # Train the Model
-def train(train_loader, epoch, model, optimizer,warm,correcter=None):
+def train(train_loader, epoch, model, optimizer, warm, correcter=None):
     train_total = 0
     train_correct = 0
 
@@ -104,8 +104,7 @@ def train(train_loader, epoch, model, optimizer,warm,correcter=None):
         softmax_matrix = outputs.cpu().detach().numpy()
 
         if warm:
-            loss_array = F.cross_entropy(logits, labels,
-                                         reduce=False)
+            loss_array = F.cross_entropy(logits, labels, reduce=False)
 
             loss = torch.sum(loss_array) / ids.shape[0]
         else:
@@ -129,8 +128,7 @@ def train(train_loader, epoch, model, optimizer,warm,correcter=None):
         correcter.async_update_prediction_matrix(ids, softmax_matrix,loss_array.data)
 
         if not warm:
-            new_ids, new_images, new_labels = correcter.patch_clean_with_corrected_sample_batch(ids.cpu().numpy(),images.cpu().numpy(),
-                                                                                                labels.cpu().numpy())
+            new_ids, new_images, new_labels = correcter.patch_clean_with_corrected_sample_batch(ids.cpu().numpy(),images.cpu().numpy(), labels.cpu().numpy())
             if len(new_ids) ==0:
                 continue
             ids = torch.from_numpy(np.array(new_ids)).cuda()
@@ -272,9 +270,9 @@ def main():
 
         if not warm:
             correcter.separate_clean_and_unclean_keys(drop_rate)
-            print("干净的样本数：",len(correcter.clean_key))
+            print("clean sample numbers：",len(correcter.clean_key))
 
-        train_acc,train_total = train(train_loader, epoch, bnn, optimizer,warm,correcter=correcter)
+        train_acc,train_total = train(train_loader, epoch, bnn, optimizer, warm, correcter=correcter)
 
         test_acc = evaluate(test_loader, bnn)
         if not warm:

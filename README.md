@@ -33,6 +33,7 @@ This repository is the source code released for paper *Exploiting Web Images for
   
 ## Requirements
   ```bash
+  python 3.x
   pytorch >= 1.7
   ```
   
@@ -53,4 +54,8 @@ This repository is the source code released for paper *Exploiting Web Images for
 ```bash
   ./web_cars.sh
   ```
+
+## performance
+![performance](imgs/performance.png)
+
 

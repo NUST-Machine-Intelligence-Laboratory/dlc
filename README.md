@@ -1,7 +1,7 @@
 # Exploiting Web Images for Fine-Grained Visual Recognition via Dynamic Loss Correction and Global Sample Selection
 
 ## Introduction
-This repository is the source code released for paper *Exploiting Web Images for Fine-Grained Visual Recognition via Dynamic Loss Correction and Global Sample Selection*
+This repository is the source code released for paper *Exploiting Web Images for Fine-Grained Visual Recognition via Dynamic Loss Correction and Global Sample Selection* submission
 
 ## Framework
 ![framework](imgs/framework.jpg)

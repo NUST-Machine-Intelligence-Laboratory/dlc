@@ -37,7 +37,7 @@ This repository is the source code released for paper *Exploiting Web Images for
   pytorch >= 1.7
   ```
   
-## run training code
+## Run training code
 - Modify the training script
   ```bash
   # modify the training script for web-cars

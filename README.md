@@ -7,7 +7,7 @@ This repository is the source code released for paper *Exploiting Web Images for
 ![framework](imgs/framework.jpg)
 
 ## Installation
-- clone project
+- Clone project
   ```bash
   git clone https://github.com/NUST-Machine-Intelligence-Laboratory/dlc.git
   cd dynamic-loss-correction
@@ -25,7 +25,7 @@ This repository is the source code released for paper *Exploiting Web Images for
   tar -xvf web-car.tar.gz
   tar -xvf web-aircraft.tar.gz
   ```
-- soft link to data
+- Create soft link to data
   ```bash
   cd dynamic-loss-correction
   ln -s ${path_to_data} data
@@ -38,7 +38,7 @@ This repository is the source code released for paper *Exploiting Web Images for
   ```
   
 ## run training code
-- modify the training script
+- Modify the training script
   ```bash
   # modify the training script for web-cars
   #!/usr/bin/env bash
@@ -50,12 +50,9 @@ This repository is the source code released for paper *Exploiting Web Images for
   python main.py --root ${path_to_data} --dataset web-car --n_classes 196 --base_lr 0.0001 --batch_size 18 --epoch 100 --drop_rate 0.2 --queue_size 10 --warm_up 10 --weight_decay 1e-5 --step 2
   ```
   
-- run scripts
+- Run scripts
 ```bash
   ./web_cars.sh
   ```
-
-## performance
-![performance](imgs/performance.png)
 
 

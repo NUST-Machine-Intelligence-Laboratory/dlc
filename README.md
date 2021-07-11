@@ -9,7 +9,7 @@ This repository is the source code released for paper *Exploiting Web Images for
 ## Installation
 - clone project
   ```bash
-  git clone https://github.com/NUST-Machine-Intelligence-Laboratory/dynamic-loss-correction.git
+  git clone https://github.com/NUST-Machine-Intelligence-Laboratory/dlc.git
   cd dynamic-loss-correction
   ```
 
